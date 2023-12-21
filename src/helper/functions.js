@@ -47,4 +47,13 @@ let createQueryObject=(currentQuery , newQuery)=>{
   }
 }
 
-export {shorten, isInCart, quantityCount, searchProducts , filterProducts , createQueryObject};
+const getInitialQuery=(searchParams)=>{
+  let query={}
+  const category=searchParams.get("category")
+  const search=searchParams.get("search")
+  if(category) query.category=category
+  if(search) query.search=search
+  return query
+}
+
+export {shorten, isInCart, quantityCount, searchProducts , filterProducts , createQueryObject , getInitialQuery};

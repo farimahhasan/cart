@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 
 import { ImSearch } from "react-icons/im"
 
-import { createQueryObject, filterProducts, searchProducts } from '../helper/functions';
+import { createQueryObject, filterProducts, getInitialQuery, searchProducts } from '../helper/functions';
 import { useSearchParams } from 'react-router-dom';
 
 const Store = () => {
@@ -34,10 +34,12 @@ const Store = () => {
     }
 
     useEffect(() => {
+        setQuery(getInitialQuery(searchParams))
         setDisplay(products)
     }, [products])
 
     useEffect(() => {
+       setSearch(query.search || "")
        let finalProducts = searchProducts(products,query.search)
        finalProducts = filterProducts(finalProducts,query.category)
        setDisplay(finalProducts)
