@@ -15,6 +15,10 @@ import { ImSearch } from "react-icons/im"
 import { createQueryObject, filterProducts, getInitialQuery, searchProducts } from '../helper/functions';
 import { useSearchParams } from 'react-router-dom';
 
+ 
+import BounceLoader from "react-spinners/BounceLoader";
+
+
 const Store = () => {
 
     const products = useProducts()
@@ -35,7 +39,8 @@ const Store = () => {
 
     useEffect(() => {
         setQuery(getInitialQuery(searchParams))
-        setDisplay(products)
+        !searchParams && setDisplay(products)
+
     }, [products])
 
     useEffect(() => {
@@ -58,6 +63,9 @@ const Store = () => {
             <div className={styles.container} >
 
                 <div className={styles.productContainer}>
+                 <div className={styles.loading}>
+                  {display.length <=0 && <BounceLoader color="blue" size={40}/>}
+                 </div>
                     {
                         display.map(product => <Product
                             key={product.id}
