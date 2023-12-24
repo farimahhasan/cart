@@ -1,4 +1,4 @@
-import { useReducer, createContext } from 'react';
+import { useReducer, createContext , useContext } from 'react';
 
 const initialState = {
     selectedItems: [],
@@ -14,7 +14,6 @@ const sumItems = items => {
 }
 
 const cartReducer = (state, action) => {
-    console.log(action.type)
     switch(action.type) {
         case "ADD_ITEM":
             if (!state.selectedItems.find(item => item.id === action.payload.id)) {
@@ -40,6 +39,7 @@ const cartReducer = (state, action) => {
         case "INCREASE":
             const indexI = state.selectedItems.findIndex(item => item.id === action.payload.id);
             state.selectedItems[indexI].quantity++;
+            console.log(state.selectedItems)
             return {
                 ...state,
                 ...sumItems(state.selectedItems)
@@ -68,11 +68,11 @@ const cartReducer = (state, action) => {
                 checkout: false
             }
         default: 
-            return state;
+            throw new Error("invalid");
     }   
 }
 
-export const CartContext = createContext()
+ export const CartContext = createContext()
 
 const CartContextProvider = ({children}) => {
 
@@ -84,6 +84,12 @@ const CartContextProvider = ({children}) => {
         </CartContext.Provider>
     );
 };
+
+//custom hook
+export const useCart=()=>{
+    const result = useContext(CartContext)
+    return result;
+}
 
 
 export default CartContextProvider;

@@ -1,8 +1,6 @@
-import React, { useContext } from 'react';
 
 // Context
-import { CartContext } from '../../context/CartContextProvider';
-
+import { useCart } from '../../context/CartContextProvider';
 // Functions
 import { shorten } from '../../helper/functions';
 
@@ -12,10 +10,10 @@ import trashIcon from "../../assets/icons/trash.svg";
 // Style
 import styles from "./Cart.module.css";
 
-const Cart = (props) => {
+const Cart = ({data}) => {
 
-    const {dispatch} = useContext(CartContext);
-    const {image, title, price, quantity} = props.data;
+    const {dispatch} = useCart();
+    const {image, title, price, quantity} = data;
 
     return (
         <div className={styles.container} >
@@ -30,10 +28,10 @@ const Cart = (props) => {
             <div className={styles.buttonContainer}>
                 {
                     quantity > 1 ? 
-                    <button onClick={() => dispatch({type: "DECREASE", payload: props.data})} >-</button> :
-                    <button onClick={() => dispatch({type: "REMOVE_ITEM", payload: props.data})} ><img src={trashIcon} alt="trash" /></button>
+                    <button onClick={() => dispatch({type: "DECREASE", payload: data})} >-</button> :
+                    <button onClick={() => dispatch({type: "REMOVE_ITEM", payload: data})} ><img src={trashIcon} alt="trash" /></button>
                 }
-                <button onClick={() => dispatch({type: "INCREASE", payload: props.data})} >+</button>
+                <button onClick={() => dispatch({type: "INCREASE", payload: data})} >+</button>
             </div>
         </div>
     );

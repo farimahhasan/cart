@@ -1,9 +1,7 @@
-import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 // Context
-import { CartContext } from '../../context/CartContextProvider';
-
+import { useCart } from '../../context/CartContextProvider';
 // Icons
 import shopIcon from "../../assets/icons/shop.svg";
 
@@ -12,7 +10,7 @@ import styles from "./Navbar.module.css";
 
 const Navbar = () => {
 
-    const {state} = useContext(CartContext);
+    const {state} = useCart();
 
     return (
         <div className={styles.mainContainer}>

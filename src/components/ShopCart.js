@@ -1,18 +1,17 @@
-import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 // Components
 import Cart from './shared/Cart';
 
 // Context
-import { CartContext } from '../context/CartContextProvider';
-
+import { useCart } from '../context/CartContextProvider';
 // Style
 import styles from "./ShopCart.module.css";
 
 const ShopCart = () => {
 
-    const { state, dispatch } = useContext(CartContext);
+    const { state, dispatch } = useCart();
+
 
     return (
         <div className={styles.container}>
