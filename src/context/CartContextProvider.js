@@ -1,4 +1,4 @@
-import React, { useReducer, createContext } from 'react';
+import { useReducer, createContext } from 'react';
 
 const initialState = {
     selectedItems: [],
@@ -84,5 +84,6 @@ const CartContextProvider = ({children}) => {
         </CartContext.Provider>
     );
 };
+
 
 export default CartContextProvider;

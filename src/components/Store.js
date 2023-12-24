@@ -52,6 +52,15 @@ const Store = () => {
     }, [query])
 
 
+    const categories=[
+       {id:1 , type:"All"},
+       {id:2 , type:"Electronics"},
+       {id:3 , type:"Jewelery"},
+       {id:4 , type:"Men's clothing"},
+       {id:5 , type:"Women's clothing"}
+    ]
+
+
     return (
         <>
             <div className={styles.inputContainer}>
@@ -64,7 +73,7 @@ const Store = () => {
 
                 <div className={styles.productContainer}>
                  <div className={styles.loading}>
-                  {display.length <=0 && <BounceLoader color="blue" size={40}/>}
+                  {display.length <=0 && <BounceLoader color="#1a73e8" size={40}/>}
                  </div>
                     {
                         display.map(product => <Product
@@ -74,14 +83,13 @@ const Store = () => {
                     }
                 </div>
 
-                <div>
-                    <h5>categories</h5>
+                <div className={styles.filterBox}>
+                    <h3>categories</h3>
                     <ul onClick={filterHandler}>
-                        <li>All</li>
-                        <li>Electronics</li>
-                        <li>Jewelery</li>
-                        <li>Men's clothing</li>
-                        <li>Women's clothing</li>
+                        {
+                            categories.map((item)=>
+                            <li key={item.id} className={item.type.toLowerCase() === query.category ? styles.selected : null}>{item.type}</li>)
+                        }
                     </ul>
                 </div>
             </div>
